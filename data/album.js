@@ -41,12 +41,10 @@ exports.create_album = function (data, callback) {
 
         // make sure the folder exists.
         function (results, fields, cb) {
-              console.log("5");
             write_succeeded = true;
             fs.mkdir('.' + local.config.static_content
                      + "albums/", function (err) {
                        if (!err || (err && err.code == "EEXIST")) {
-                         console.log("OKAY");
                          cb(null);
                        } else {
                          cb(err);
@@ -55,14 +53,12 @@ exports.create_album = function (data, callback) {
         },
         function (cb) {
             fs.mkdir('.' + local.config.static_content + 'albums/' + data.name + "/",
-                     function (err) { cb(null); });
+                     cb);
         }
     ],
     function (err, results) {
         // convert file errors to something we like.
         if (err) {
-          console.log("ERRRRRRR");
-          console.log(JSON.stringify(err));
             if (write_succeeded) delete_album(dbc, data.name);
             if (err instanceof Error && err.code == 'ER_EXISTS')
                 callback(backhelp.album_already_exists());
@@ -71,7 +67,6 @@ exports.create_album = function (data, callback) {
             else
                 callback(err);
         } else {
-          console.log("OH YESSSSSSSSSSSS");
             callback(err, err ? null : data);
         }
     });
@@ -150,7 +145,6 @@ exports.add_photo = function (photo_data, filename, path_to_photo, callback) {
 
     var basepath = __dirname + '/..' + local.config.static_content + 'albums/';
 
-console.log("WOOOOOOOOOOO");
     async.waterfall([
         // validate data
         function (cb) {
@@ -158,10 +152,9 @@ console.log("WOOOOOOOOOOO");
                 backhelp.verify(photo_data,
                                 [ "albumid", "description", "date" ]);
                 photo_data.filename = base_fn;
-                                console.log("2");
                 if (!backhelp.valid_filename(photo_data.albumid)) {
                     throw invalid_album_name();
-                  }
+                }
                 cb(null);
                 return;
             } catch (e) {
@@ -218,7 +211,6 @@ console.log("WOOOOOOOOOOO");
 
 
 function invalid_album_name() {
-  console.log("I'm never here");
     return backhelp.error("invalid_album_name",
                           "Album names can have letters, #s, _ and, -");
 }
