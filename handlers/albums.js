@@ -51,7 +51,7 @@ Album.prototype.photos = function (pn, ps, callback) {
             callback(null, this.album_photos);
         }
     );
-};             
+};
 Album.prototype.add_photo = function (data, filename, path, callback) {
     album_data.add_photo(data, filename, path, function (err, photo_data) {
         if (err)
@@ -99,7 +99,7 @@ Photo.prototype.response_obj = function() {
  */
 exports.create_album = function (req, res) {
     async.waterfall([
-        // make sure the albumid is valid 
+        // make sure the albumid is valid
         function (cb) {
             if (!req.body || !req.body.name) {
                 cb(helpers.no_such_album());
@@ -120,6 +120,7 @@ exports.create_album = function (req, res) {
             helpers.send_failure(res, helpers.http_code_for_error(err), err);
         } else {
             var a = new Album(results);
+            console.log(JSON.stringify(a, 0, 2));
             helpers.send_success(res, {album: a.response_obj() });
         }
     });
@@ -254,4 +255,3 @@ exports.add_photo_to_album = function (req, res) {
         helpers.send_success(res, out);
     });
 };
-
