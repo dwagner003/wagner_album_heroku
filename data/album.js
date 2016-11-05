@@ -53,6 +53,8 @@ exports.create_album = function (data, callback) {
     function (err, results) {
         // convert file errors to something we like.
         if (err) {
+          console.log("ERRRRRRR");
+          console.log(JSON.stringify(err));
             if (write_succeeded) delete_album(dbc, data.name);
             if (err instanceof Error && err.code == 'ER_EXISTS')
                 callback(backhelp.album_already_exists());
@@ -218,14 +220,14 @@ function invalid_filename() {
 
 
 function delete_album(dbc, name) {
-    dbc.query(
+    db.pool.query(
         "DELETE FROM Albums WHERE name = ?",
         [ name ],
         function (err, results) {});
 }
 
 function delete_photo(dbc, albumid, fn) {
-    dbc.query(
+    db.pool.query(
         "DELETE FROM Photos WHERE albumid = ? AND filename = ?",
         [ albumid, fn ],
         function (err, results) { });
