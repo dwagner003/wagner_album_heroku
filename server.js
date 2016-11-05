@@ -16,7 +16,7 @@ var db = require('./data/db.js'),
     helpers = require('./handlers/helpers.js');
 
 var app = express();
-app.use(express.static(__dirname + "/static"));
+app.use(express.static("/static"));
 
 var session_configuration = {
     secret: '0GBlJZ9EKBt2Zbi2flRPvztczCewBabc',
