@@ -18,16 +18,13 @@ exports.create_album = function (data, callback) {
         // validate data.
         function (cb) {
             try {
-              console.log("1");
                 backhelp.verify(data,
                                 [ "name",
                                   "title",
                                   "date",
                                   "description" ]);
-              console.log("2");
                 if (!backhelp.valid_filename(data.name))
                     throw invalid_album_name();
-              console.log("3");
 
                 cb(null);
             } catch (e) {
@@ -36,7 +33,6 @@ exports.create_album = function (data, callback) {
         },
 
         function (cb) {
-              console.log("4");
             db.dbpool.query(
                 "INSERT INTO Albums VALUES (?, ?, ?, ?)",
                 [ data.name, data.title, data.date, data.description ],
@@ -148,13 +144,18 @@ console.log("WOOOOOOOOOOO");
         // validate data
         function (cb) {
             try {
+              console.log("1");
+
                 backhelp.verify(photo_data,
                                 [ "albumid", "description", "date" ]);
                 photo_data.filename = base_fn;
+                                console.log("2");
                 if (!backhelp.valid_filename(photo_data.albumid))
                     throw invalid_album_name();
+                    console.log("3");
                 cb(null);
             } catch (e) {
+                                console.log("4err");
               console.log(JSON.stringify(e, 0, 2));
                 cb(e);
                 return;
@@ -168,7 +169,7 @@ console.log("WOOOOOOOOOOO");
         },
 */
         function (/*results, */ cb) {
-            console.log(results);
+                                console.log("5");
 
             db.dbpool.query(
                 "INSERT INTO Photos VALUES (?, ?, ?, ?)",
