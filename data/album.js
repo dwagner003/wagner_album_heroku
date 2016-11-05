@@ -44,7 +44,13 @@ exports.create_album = function (data, callback) {
               console.log("5");
             write_succeeded = true;
             fs.mkdir('.' + local.config.static_content
-                     + "albums/", cb);
+                     + "albums/", function (err) {
+                       if (!err || (err && err.code == "EEXIST")) {
+                         cb(null);
+                       } else {
+                         cb(err);
+                       }
+                     });
         },
         function (results,cb) {
             fs.mkdir('.' + local.config.static_content + 'albums/' + data.name + "/", cb);
@@ -220,14 +226,14 @@ function invalid_filename() {
 
 
 function delete_album(dbc, name) {
-    db.pool.query(
+    db.dbpool.query(
         "DELETE FROM Albums WHERE name = ?",
         [ name ],
         function (err, results) {});
 }
 
 function delete_photo(dbc, albumid, fn) {
-    db.pool.query(
+    db.dbpool.query(
         "DELETE FROM Photos WHERE albumid = ? AND filename = ?",
         [ albumid, fn ],
         function (err, results) { });
