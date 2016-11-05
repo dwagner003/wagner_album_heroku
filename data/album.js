@@ -212,6 +212,7 @@ console.log("WOOOOOOOOOOO");
 
 
 function invalid_album_name() {
+  console.log("I'm never here");
     return backhelp.error("invalid_album_name",
                           "Album names can have letters, #s, _ and, -");
 }
