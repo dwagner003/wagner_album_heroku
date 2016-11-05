@@ -20,7 +20,7 @@ app.use(express.static(__dirname + "/static"));
 
 var session_configuration = {
     secret: 'whoopity whoopity whoop whoop',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: { secure: true }
 };
