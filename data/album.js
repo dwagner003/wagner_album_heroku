@@ -183,6 +183,8 @@ console.log("WOOOOOOOOOOO");
 
         // make sure the folder exists !!!!
         function (results, fields, cb) {
+          console.log("6");
+          console.log(arguments);
             write_succeeded = true;
             fs.mkdir(basepath, function () { cb(null); });
         },
