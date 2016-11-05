@@ -1,6 +1,6 @@
 
 var fs = require('fs'),
-//    cloudinary = require('cloudinary'),
+    cloudinary = require('cloudinary'),
     local = require('../local.config.json'),
     db = require('./db.js'),
     path = require("path"),
@@ -163,20 +163,22 @@ exports.add_photo = function (photo_data, filename, path_to_photo, callback) {
             }
         },
 
-/*        function (cb) {
+        function (cb) {
             cloudinary.uploader.upload(path_to_photo, function (results) {
                     cb(null, results);
                 });
         },
-*/
-        function (/*results, */ cb) {
+
+        function (results, cb) {
             db.dbpool.query(
                 "INSERT INTO Photos VALUES (?, ?, ?, ?)",
-                [ photo_data.albumid, photo_data.filename /*results.secure_url*/, photo_data.description,
+                [ photo_data.albumid, results.secure_url, photo_data.description,
                   photo_data.date ],
-                cb);
+                function (err, results, fields) {
+                  cb(err, results);
+                });
         },
-
+/*
         // make sure the folder exists !!!!
         function (results, fields, cb) {
             write_succeeded = true;
@@ -194,6 +196,7 @@ exports.add_photo = function (photo_data, filename, path_to_photo, callback) {
                 + photo_data.albumid + "/" + base_fn;
             backhelp.file_copy(path_to_photo, save_path, true, cb);
         },
+        */
     ],
     function (err, results, fields) {
         if (err && write_succeeded)
