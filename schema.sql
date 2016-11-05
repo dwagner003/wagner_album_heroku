@@ -5,6 +5,7 @@ CREATE DATABASE heroku_7aa51639c41e7e5
     DEFAULT CHARACTER SET utf8
     DEFAULT COLLATE utf8_general_ci;
 
+
 USE heroku_7aa51639c41e7e5;
 
 
