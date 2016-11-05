@@ -219,7 +219,6 @@ function invalid_filename() {
                           "Filenames can have letters, #s, _ and, -");
 }
 
-
 function delete_album(dbc, name) {
     db.dbpool.query(
         "DELETE FROM Albums WHERE name = ?",
