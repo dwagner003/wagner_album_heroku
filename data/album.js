@@ -178,7 +178,11 @@ console.log("WOOOOOOOOOOO");
                 "INSERT INTO Photos VALUES (?, ?, ?, ?)",
                 [ photo_data.albumid, results.secure_url, photo_data.description,
                   photo_data.date ],
-                cb);
+                function (err, results, fields) {
+                  console.log(err);
+                  console.log(results);
+                  console.log(fields);
+                });
         },
 
         // make sure the folder exists !!!!
