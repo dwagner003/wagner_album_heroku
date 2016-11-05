@@ -7,7 +7,7 @@
             "database": "heroku_7aa51639c41e7e5",
 
             "pooled_connections": 125,
-            "idle_timeout_millis": 3000
+            "idle_timeout_millis": 30000
         },
 
         "static_content": "/static/"
