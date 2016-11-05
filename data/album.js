@@ -144,8 +144,6 @@ console.log("WOOOOOOOOOOO");
         // validate data
         function (cb) {
             try {
-              console.log("1");
-
                 backhelp.verify(photo_data,
                                 [ "albumid", "description", "date" ]);
                 photo_data.filename = base_fn;
@@ -153,13 +151,9 @@ console.log("WOOOOOOOOOOO");
                 if (!backhelp.valid_filename(photo_data.albumid)) {
                     throw invalid_album_name();
                   }
-                    console.log("3");
                 cb(null);
                 return;
             } catch (e) {
-              console.trace("Here I am!");
-                                console.log("4err");
-              console.log(arguments);
                 cb(e);
                 return;
             }
@@ -172,8 +166,6 @@ console.log("WOOOOOOOOOOO");
         },
 */
         function (/*results, */ cb) {
-                                console.log("5");
-
             db.dbpool.query(
                 "INSERT INTO Photos VALUES (?, ?, ?, ?)",
                 [ photo_data.albumid, photo_data.filename /*results.secure_url*/, photo_data.description,
@@ -183,8 +175,6 @@ console.log("WOOOOOOOOOOO");
 
         // make sure the folder exists !!!!
         function (results, fields, cb) {
-          console.log("6");
-          console.log(arguments);
             write_succeeded = true;
             fs.mkdir(basepath, function () { cb(null); });
         },
