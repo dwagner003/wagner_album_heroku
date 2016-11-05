@@ -53,7 +53,7 @@ exports.create_album = function (data, callback) {
                        }
                      });
         },
-        function (results,cb) {
+        function (cb) {
             fs.mkdir('.' + local.config.static_content + 'albums/' + data.name + "/",
                      function (err) { cb(null); });
         }
