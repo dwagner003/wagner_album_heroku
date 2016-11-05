@@ -8,6 +8,8 @@ CREATE DATABASE heroku_7aa51639c41e7e5
 USE heroku_7aa51639c41e7e5;
 
 
+
+
 CREATE TABLE Albums
 (
   name VARCHAR(50) UNIQUE PRIMARY KEY,
