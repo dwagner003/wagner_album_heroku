@@ -16,6 +16,7 @@ exports.verify = function (data, field_names) {
 exports.error = function (code, message) {
     var e = new Error(message);
     e.code = code;
+    console.log("RETURNING ERROR: " + JSON.stringify(e));
     return e;
 };
 
@@ -47,7 +48,7 @@ exports.file_copy = function () {
 
     function copy(err) {
         var is, os;
- 
+
         if (!err && !can_overwrite) {
             return callback(backhelp.error("file_exists",
                                      "File " + dst + " exists."));
@@ -65,7 +66,7 @@ exports.file_copy = function () {
             is.pipe(os);
         });
     }
-    
+
     fs.stat(dst, copy);
 };
 
@@ -105,5 +106,3 @@ exports.no_such_album = function () {
     return exports.error("no_such_album",
                          "The specified album does not exist");
 };
-
-
