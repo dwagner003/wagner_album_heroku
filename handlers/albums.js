@@ -116,6 +116,7 @@ exports.create_album = function (req, res) {
         }
     ],
     function (err, results) {
+      console.log(arguments);
         if (err) {
             helpers.send_failure(res, helpers.http_code_for_error(err), err);
         } else {
