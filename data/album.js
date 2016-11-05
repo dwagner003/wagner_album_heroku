@@ -70,6 +70,7 @@ exports.create_album = function (data, callback) {
             else
                 callback(err);
         } else {
+          console.log("OH YESSSSSSSSSSSS");
             callback(err, err ? null : data);
         }
     });
