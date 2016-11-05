@@ -150,7 +150,7 @@ console.log("WOOOOOOOOOOO");
                                 [ "albumid", "description", "date" ]);
                 photo_data.filename = base_fn;
                                 console.log("2");
-                if (!backhelp.valid_filename(photo_data.albumid)) {}
+                if (!backhelp.valid_filename(photo_data.albumid)) {
                     throw invalid_album_name();
                   }
                     console.log("3");
