@@ -48,12 +48,12 @@ exports.create_album = function (data, callback) {
         function (results,cb) {
             fs.mkdir('.' + local.config.static_content + 'albums/' + data.name + "/", cb);
         }
-    ], 
+    ],
     function (err, results) {
         // convert file errors to something we like.
         if (err) {
             if (write_succeeded) delete_album(dbc, data.name);
-            if (err instanceof Error && err.code == 'ER_EXISTS') 
+            if (err instanceof Error && err.code == 'ER_EXISTS')
                 callback(backhelp.album_already_exists());
             else if (err instanceof Error && err.errno != undefined)
                 callback(backhelp.file_error(err));
@@ -62,7 +62,7 @@ exports.create_album = function (data, callback) {
         } else {
             callback(err, err ? null : data);
         }
-    }); 
+    });
 };
 
 
@@ -120,7 +120,7 @@ exports.all_albums = function (sort_by, desc, skip, count, callback) {
     async.waterfall([
         function (cb) {
             db.dbpool.query(
-                "SELECT * FROM Albums ORDER BY ? " 
+                "SELECT * FROM Albums ORDER BY ? "
                     + (desc ? "DESC" : "ASC")
                     + " LIMIT ?, ?",
                 [ sort_by, skip, count ],
@@ -160,7 +160,7 @@ exports.add_photo = function (photo_data, filename, path_to_photo, callback) {
                 });
         },
 */
-        function (results, cb) {
+        function (/*results, */ cb) {
             console.log(results);
 
             db.dbpool.query(
@@ -189,7 +189,7 @@ exports.add_photo = function (photo_data, filename, path_to_photo, callback) {
         },
     ],
     function (err, results, fields) {
-        if (err && write_succeeded) 
+        if (err && write_succeeded)
             delete_photo(dbc, photo_data.albumid, base_fn);
         if (err) {
             callback (err);
@@ -226,4 +226,3 @@ function delete_photo(dbc, albumid, fn) {
         [ albumid, fn ],
         function (err, results) { });
 }
-
