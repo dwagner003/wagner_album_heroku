@@ -156,7 +156,7 @@ console.log("WOOOOOOOOOOO");
                 cb(null);
             } catch (e) {
                                 console.log("4err");
-              console.log(JSON.stringify(e, 0, 2));
+              console.log(arguments);
                 cb(e);
                 return;
             }
