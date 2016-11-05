@@ -18,13 +18,16 @@ exports.create_album = function (data, callback) {
         // validate data.
         function (cb) {
             try {
+              console.log("1");
                 backhelp.verify(data,
                                 [ "name",
                                   "title",
                                   "date",
                                   "description" ]);
+              console.log("2");
                 if (!backhelp.valid_filename(data.name))
                     throw invalid_album_name();
+              console.log("3");
 
                 cb(null);
             } catch (e) {
@@ -33,6 +36,7 @@ exports.create_album = function (data, callback) {
         },
 
         function (cb) {
+              console.log("4");
             db.dbpool.query(
                 "INSERT INTO Albums VALUES (?, ?, ?, ?)",
                 [ data.name, data.title, data.date, data.description ],
@@ -41,6 +45,7 @@ exports.create_album = function (data, callback) {
 
         // make sure the folder exists.
         function (results, fields, cb) {
+              console.log("5");
             write_succeeded = true;
             fs.mkdir('.' + local.config.static_content
                      + "albums/", cb);
