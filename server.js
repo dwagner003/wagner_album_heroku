@@ -19,17 +19,17 @@ var app = express();
 app.use(express.static(__dirname + "/static"));
 
 var session_configuration = {
-    secret: 'whoopity whoopity whoop whoop',
+    secret: '0GBlJZ9EKBt2Zbi2flRPvztczCewBabc',
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: { httpOnly: true }
 };
 
 session_configuration.cookie.secure = false;
 
 app.use(flash());
 app.use(session(session_configuration));
-app.use(cookieParser('whoopity whoopity whoop whoop'));
+app.use(cookieParser('0GBlJZ9EKBt2Zbi2flRPvztczCewBabc'));
 app.use(passport.initialize());
 app.use(passport.session());
 
