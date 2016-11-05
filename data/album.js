@@ -46,6 +46,7 @@ exports.create_album = function (data, callback) {
             fs.mkdir('.' + local.config.static_content
                      + "albums/", function (err) {
                        if (!err || (err && err.code == "EEXIST")) {
+                         console.log("OKAY");
                          cb(null);
                        } else {
                          cb(err);
