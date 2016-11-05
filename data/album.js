@@ -155,6 +155,7 @@ console.log("WOOOOOOOOOOO");
                   }
                     console.log("3");
                 cb(null);
+                return;
             } catch (e) {
               console.trace("Here I am!");
                                 console.log("4err");
