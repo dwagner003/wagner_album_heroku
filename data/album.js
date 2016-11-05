@@ -149,6 +149,7 @@ exports.add_photo = function (photo_data, filename, path_to_photo, callback) {
                     throw invalid_album_name();
                 cb(null);
             } catch (e) {
+              console.log(JSON.stringify(e, 0, 2));
                 cb(e);
                 return;
             }
