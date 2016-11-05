@@ -45,9 +45,12 @@ var upload = multer({ dest: "uploads/" });
  * Passport authentication methods.
  */
 function alwaysAuthenticated(req, res, next) {
+  console.log("Checikingauth");
     if (req.isAuthenticated()) {
+  console.log("AUTH!!!");
         next();
     } else {
+  console.log("NO AUTH :( :())");
         res.redirect("/pages/login");
     }
 }
