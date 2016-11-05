@@ -174,10 +174,9 @@ console.log("WOOOOOOOOOOO");
         function (/*results, */ cb) {
                                 console.log("5");
 
-console.log(photo_data);
             db.dbpool.query(
                 "INSERT INTO Photos VALUES (?, ?, ?, ?)",
-                [ photo_data.albumid, results.secure_url, photo_data.description,
+                [ photo_data.albumid, photo_data.filename /*results.secure_url*/, photo_data.description,
                   photo_data.date ],
                 function (err, results, fields) {
                   console.log(err);
